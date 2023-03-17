@@ -1,1 +1,1 @@
-Реализация просто CRUD api на nodeJS
+Реализация простого CRUD api на nodeJS
