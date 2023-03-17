@@ -1,0 +1,23 @@
+{
+  "name": "simple_crud_api_nodejs",
+  "version": "0.0.1",
+  "description": "Реализация простого CRUD api на nodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoluyanovKonstantin/simple_CRUD_API_NodeJS.git"
+  },
+  "author": "Soluyanov Konstantin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoluyanovKonstantin/simple_CRUD_API_NodeJS/issues"
+  },
+  "homepage": "https://github.com/SoluyanovKonstantin/simple_CRUD_API_NodeJS#readme",
+  "dependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
