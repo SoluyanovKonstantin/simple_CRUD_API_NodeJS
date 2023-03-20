@@ -9,16 +9,24 @@ export default class Router {
 
         if (req.url === '/') {
             this.controller.getMainPage(res);
-        } else if (req.url === 'api/users' && req.method === 'GET') {
+        } else if(req.url === '/script.js') {
+            this.controller.getScript(res);
+        } else if (req.url === '/api/users' && req.method === 'GET') {
             this.controller.getUsers(res);
-        } else if (req.url === 'api/users' && req.method === 'POST') {
-            this.controller.createUser(req.data);
-        } else if (req.url.includes('api/users/') && req.method === 'GET') {
-            this.controller.getUser(req.data, res);
-        } else if (req.url.includes('api/users/') && req.method === 'PUT') {
-            this.controller.updateUser(req.data.id, req.data);
-        } else if (req.url.includes('api/users/') && req.method === 'DELETE') {
-            this.controller.deleteUser(req.data);
+        } else if (req.url === '/api/users' && req.method === 'POST') {
+            req.on('data', (chunk) => {
+                this.controller.createUser(chunk, res);
+            })
+        } else if (req.url.includes('/api/users/') && req.method === 'GET') {
+            const id = req.url.split('/')[req.url.split('/').length - 1];
+            this.controller.getUser(id, res);
+
+        } else if (req.url.includes('/api/users/') && req.method === 'PUT') {
+            const id = req.url.split('/')[req.url.split('/').length - 1];
+            this.controller.updateUser(id, req.data, res);
+        } else if (req.url.includes('/api/users/') && req.method === 'DELETE') {
+            const id = req.url.split('/')[req.url.split('/').length - 1];
+            this.controller.deleteUser(id, res);
         } else {
             res.writeHead(404, 'such request not found')
             res.end();
