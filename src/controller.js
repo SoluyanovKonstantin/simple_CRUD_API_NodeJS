@@ -49,27 +49,50 @@ export default class Controller {
     createUser(user, res) {
         let newUser = JSON.parse(new TextDecoder().decode(user));
 
+        if(!user.username || !user.age || !user.hobbies) {
+            res.writeHead(400)
+            res.write('Required fields are not filled');
+            res.end();
+        }
+
         newUser.id = uuid();
         users.push(newUser);
+        res.writeHead(201);
         res.end();
     }
 
     updateUser(id, user, res) {
+        if(!validate(id)) {
+            res.writeHead(400);
+            res.end();
+            return;
+        }
+
         const updatedUser = JSON.parse(new TextDecoder().decode(user));
 
-        users.find((user, index) => {
+        if (!users.find((user, index) => {
             if(user.id === id) {
                 users[index] = updatedUser;
                 return true;
             }
 
             return false;
-        })
+        })) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
 
         res.end();
     }
 
     deleteUser(id, res) {
+        if(!validate(id)) {
+            res.writeHead(400);
+            res.end();
+            return;
+        }
+        
         const index = users.findIndex((user) => user.id === id);
         if(id === -1) {
             res.writeHead(404);
@@ -83,6 +106,7 @@ export default class Controller {
         }
         users = users.slice(0, index).concat(users.slice(index + 1));
         
+        res.writeHead(204);
         res.end();
     }
 }
