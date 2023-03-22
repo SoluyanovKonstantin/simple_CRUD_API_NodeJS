@@ -23,7 +23,9 @@ export default class Router {
 
         } else if (req.url.includes('/api/users/') && req.method === 'PUT') {
             const id = req.url.split('/')[req.url.split('/').length - 1];
-            this.controller.updateUser(id, req.data, res);
+            req.on('data', (chunk) => {
+                this.controller.updateUser(id, chunk, res);
+            })
         } else if (req.url.includes('/api/users/') && req.method === 'DELETE') {
             const id = req.url.split('/')[req.url.split('/').length - 1];
             this.controller.deleteUser(id, res);

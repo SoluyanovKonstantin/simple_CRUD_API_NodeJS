@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid, validate } from 'uuid';
 
 let users = [];
 
@@ -29,13 +29,21 @@ export default class Controller {
     getUsers(res) {
         res.write(JSON.stringify(users));
         res.end();
-        console.log('get users')
     }
 
     getUser(id, res) {
-        res.write(JSON.stringify(users.find(user => user.id === id)));
+        if(!validate(id)) {
+            res.writeHead(400);
+            res.end();
+            return;
+        }
+        const user = JSON.stringify(users.find(user => user.id === id));
+        if(user) {
+            res.write(user);
+        } else {
+            res.writeHead(404);
+        }
         res.end();
-        console.log('get user ', id)
     }
 
     createUser(user, res) {
@@ -43,23 +51,22 @@ export default class Controller {
 
         newUser.id = uuid();
         users.push(newUser);
-        console.log(users);
         res.end();
     }
 
     updateUser(id, user, res) {
+        const updatedUser = JSON.parse(new TextDecoder().decode(user));
+
         users.find((user, index) => {
             if(user.id === id) {
-                users[index] = user;
+                users[index] = updatedUser;
                 return true;
             }
 
             return false;
         })
 
-        console.log(users);
         res.end();
-        console.log('update user ', id, user)
     }
 
     deleteUser(id, res) {
@@ -74,10 +81,8 @@ export default class Controller {
             res.end();
             return;
         }
-        users = users.slice(0, index - 1).concat(users.slice(index + 1));
+        users = users.slice(0, index).concat(users.slice(index + 1));
         
-        console.log(users);
         res.end();
-        console.log('delete user ', id)
     }
 }

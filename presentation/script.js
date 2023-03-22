@@ -8,7 +8,6 @@ $('#getUsers').on('click', () => {
     dataType: 'JSON',
     success: function( result ) {
       users = result;
-      console.log(result)
     }
   })
 })
@@ -25,7 +24,6 @@ $('#getUser').on('submit', function (ev) {
     url: `${url}users/${data.id}`,
     dataType: 'JSON',
     success: function( result ) {
-      console.log(result)
     }
   })
 })
@@ -51,7 +49,6 @@ $('#createUser').on('submit', function (ev) {
     data: JSON.stringify(data),
     contentType:"application/json; charset=utf-8",
     success: function( result ) {
-      console.log(result)
     }
   })
 })
@@ -68,7 +65,6 @@ $('#deleteUser').on('submit', function (ev) {
     url: `${url}users/${data.id}`,
 
     success: function( result ) {
-      console.log(result)
     }
   })
 })
@@ -98,7 +94,6 @@ $('#updateUser').on('submit', function (ev) {
 
     data: JSON.stringify(data),
     success: function( result ) {
-      console.log(result)
     }
   })
 })
