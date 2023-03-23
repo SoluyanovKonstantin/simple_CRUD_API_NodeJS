@@ -109,6 +109,17 @@ $('#get404').on('click', () => {
   })
 })
 
+$('#get500').on('click', () => {
+  $.ajax({
+    type: 'GET',
+    url: `${url}500`,
+    dataType: 'JSON',
+    success: function( result ) {
+      users = result;
+    }
+  })
+})
+
 function addHobbie(id = 'hobbies') {
   $('#' + id).append(`<input type="string" class="${id}" name="hobbies" placeholder="Хобби">`)
 }
