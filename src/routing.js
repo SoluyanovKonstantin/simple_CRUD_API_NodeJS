@@ -29,7 +29,10 @@ export default class Router {
         } else if (req.url.includes('/api/users/') && req.method === 'DELETE') {
             const id = req.url.split('/')[req.url.split('/').length - 1];
             this.controller.deleteUser(id, res);
-        } else {
+        } else if(req.url === '/api/500') {
+            throw new Error('500');
+        }
+        else {
             res.writeHead(404, '');
             res.write('Such resource not found');
             res.end();
