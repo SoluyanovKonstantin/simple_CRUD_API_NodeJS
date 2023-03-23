@@ -30,7 +30,8 @@ export default class Router {
             const id = req.url.split('/')[req.url.split('/').length - 1];
             this.controller.deleteUser(id, res);
         } else {
-            res.writeHead(404, 'such request not found')
+            res.writeHead(404, '');
+            res.write('Such resource not found');
             res.end();
         }
     }

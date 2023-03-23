@@ -98,6 +98,17 @@ $('#updateUser').on('submit', function (ev) {
   })
 })
 
+$('#get404').on('click', () => {
+  $.ajax({
+    type: 'GET',
+    url: `${url}some-non/existing/resource`,
+    dataType: 'JSON',
+    success: function( result ) {
+      users = result;
+    }
+  })
+})
+
 function addHobbie(id = 'hobbies') {
   $('#' + id).append(`<input type="string" class="${id}" name="hobbies" placeholder="Хобби">`)
 }
