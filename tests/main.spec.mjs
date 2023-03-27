@@ -74,7 +74,7 @@ it("should create an user", (done) => {
   req.end();
 })
 
-it("should not create an user without required field", (done) => {
+it("Should not create an user without required field", (done) => {
   const req = http.request(options, (res) => {
     res.setEncoding('utf8');
 
