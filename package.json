@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start:dev": "nodemon main",
-    "start:prod": "npx webpack --config webpack.config.js"
+    "start:prod": "npx webpack --config webpack.config.js",
+    "test": "mocha tests/main.spec.mjs"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1"
   }

@@ -49,7 +49,7 @@ export default class Controller {
     createUser(user, res) {
         let newUser = JSON.parse(new TextDecoder().decode(user));
 
-        if(!user.username || !user.age || !user.hobbies) {
+        if(!newUser.username || !newUser.age || !newUser.hobbies) {
             res.writeHead(400)
             res.write('Required fields are not filled');
             res.end();

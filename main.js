@@ -9,7 +9,7 @@ http.createServer(async (req, res) => {
     const domain = new Domain();
 
     domain.on('error', (err) => {
-        res.writeHead(500, 'Server Error', {'Content-Type': 'text/html'});
+        res.writeHead(500, 'Server Error', {'Content-Type': 'text/plain'});
         res.end("Server error: " + err.message);
     })
 
