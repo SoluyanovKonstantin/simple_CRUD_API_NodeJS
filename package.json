@@ -7,6 +7,8 @@
   "scripts": {
     "start:dev": "nodemon main",
     "start:prod": "npx webpack --config webpack.config.js",
+    "start:dev:multi": "cross-env CLUSTER_API='true' nodemon main",
+    "start:prod:multi": "cross-env CLUSTER_API='true' npx webpack --config webpack.config.js",
     "test": "mocha tests/main.spec.mjs"
   },
   "repository": {
@@ -20,10 +22,12 @@
   },
   "homepage": "https://github.com/SoluyanovKonstantin/simple_CRUD_API_NodeJS#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "nodemon": "^2.0.21",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "mocha": "^10.2.0",
     "supertest": "^6.3.3",
     "webpack": "^5.76.3",

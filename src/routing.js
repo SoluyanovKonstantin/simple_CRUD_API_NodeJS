@@ -1,8 +1,6 @@
-import Controller from './controller.js';
-
 export default class Router {
-    constructor() {
-        this.controller = new Controller();
+    constructor(controller) {
+        this.controller = controller;
     }
 
     async route(req, res) {

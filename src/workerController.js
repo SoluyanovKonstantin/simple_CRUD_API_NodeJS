@@ -2,7 +2,7 @@ import fs from 'fs'
 import { v4 as uuid, validate } from 'uuid';
 import { createPromise } from './utils.js';
 
-export default class Controller {
+export default class WorkerController {
     constructor(users) {
         this.users = users;
     }
@@ -50,6 +50,7 @@ export default class Controller {
 
         newUser.id = uuid();
         this.users.push(newUser);
+        process.send(this.users);
         res.writeHead(201);
         res.end();
     }
@@ -67,6 +68,7 @@ export default class Controller {
             if(user.id === id) {
                 this.users[index] = updatedUser;
                 this.users[index].id = id;
+                process.send(this.users);
                 return true;
             }
 
@@ -93,8 +95,8 @@ export default class Controller {
             res.end();
             return;
         }
-        this.users.splice(index, 1)
-        
+        this.users.splice(index, 1);
+        process.send(this.users);
         res.writeHead(204);
         res.end();
     }
