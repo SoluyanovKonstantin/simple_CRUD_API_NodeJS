@@ -51,6 +51,7 @@ export default class Controller {
         newUser.id = uuid();
         this.users.push(newUser);
         res.writeHead(201);
+        res.write(JSON.stringify(newUser));
         res.end();
     }
 

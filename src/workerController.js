@@ -52,6 +52,7 @@ export default class WorkerController {
         this.users.push(newUser);
         process.send(this.users);
         res.writeHead(201);
+        res.write(JSON.stringify(newUser));
         res.end();
     }
 
